@@ -1,3 +1,4 @@
+![Project Screenshot](https://github.com/user-attachments/assets/58fc6da1-4b60-4906-a448-17c98d5ac82c)
 <h1>Stewart-Platform</h1> 
 
 This repository contains the Hexapod class, a Python-based representation of a hexapod robot. The Hexapod class provides functions to simulate the inverse and forward kinematics of the robot, along with visualization functions to show the robot in a 3D space.

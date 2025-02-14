@@ -1,29 +1,63 @@
 ![Project Screenshot](https://github.com/user-attachments/assets/58fc6da1-4b60-4906-a448-17c98d5ac82c)
-<h1>Stewart-Platform</h1> 
+# Stewart-Gogh Platform Kinematics and Visualization
 
-This repository contains the Hexapod class, a Python-based representation of a hexapod robot. The Hexapod class provides functions to simulate the inverse and forward kinematics of the robot, along with visualization functions to show the robot in a 3D space.
+## Overview
+This project implements a **Hexapod** robot simulation using Python. The hexapod is a six-legged robotic platform that can perform **forward kinematics (FK)** and **inverse kinematics (IK)** computations. The program also provides visualization tools to render the hexapod's structure in 3D using Matplotlib.
 
-<H2> Features</H2>
+## Features
+- **Hexapod Initialization:** Creates a six-legged robot with configurable body and base dimensions.
+- **Inverse Kinematics (IK):** Computes the required leg positions for a given robot pose.
+- **Forward Kinematics (FK):** Estimates the robot's pose given a set of leg lengths.
+- **3D Visualization:** Displays the hexapod structure in a 3D space using Matplotlib.
+- **Transformation Matrices:** Computes and applies transformations for robot motion simulation.
 
-Configuration of the robot body and leg dimensions.\
-Inverse Kinematics (IK) computation.\
-Forward Kinematics (FK) computation with iterative error correction.\
-3D visualization of the robot with base, body, and leg representations.\
-Computation of body transformation using Euler angles and rotation matrices.\
-Jacobian computation for kinematic transformations.
+## Installation
+### Prerequisites
+Ensure you have **Python 3.x** installed along with the required libraries:
+```sh
+pip install numpy matplotlib
+```
 
-<H2>Methods</H2>
+## Usage
+### Creating an Instance
+```python
+from hexapod import Hexapod
+my_hexa = Hexapod()
+```
 
-<H3>Initialization</H3>
-__init__(self, upper_rad=150, lower_rad=250, upper_lim=1000, lower_lim=10, alpha=60, beta=60, euler_order='zyz'): Initializes the Hexapod object with specified dimensions and angles.
+### Performing Inverse Kinematics (IK)
+```python
+pose = [10, 0, 100, 5, 5, 0]  # [x, y, z, roll, pitch, yaw]
+leg_vectors = my_hexa.ik(pose)
+```
 
-<H3>Kinematics</H3>
-ik(self, pose): Computes the Inverse Kinematics for a given pose.
+### Performing Forward Kinematics (FK)
+```python
+leg_lengths = [250.173, 247.707, 253.307, 277.633, 278.454, 254.332]
+error_threshold = 0.5
+initial_guess = [0, 0, 150, 0, 0, 0]
+computed_pose = my_hexa.fk(leg_lengths, error_threshold, initial_guess)
+```
 
-fk(self, leg_lengths, error, guess_pose): Computes the Forward Kinematics iteratively until the error is minimal.
+### Visualizing the Hexapod
+```python
+my_hexa.show_robot()
+```
 
-<H3>Visualization</H3>
-show_robot(self): Visualizes the robot in 3D space.
+## Class Methods
+| Method | Description |
+|--------|-------------|
+| `__init__()` | Initializes the hexapod with default or specified parameters. |
+| `ik(pose)` | Computes the required leg vectors to achieve a target pose. |
+| `fk(leg_lengths, error, guess_pose)` | Estimates the robot’s pose given leg lengths. |
+| `show_robot()` | Renders the hexapod in a 3D Matplotlib plot. |
 
-<H3>Internals</H3>
-Several methods to handle robot transformations, Euler angle conversions, Jacobian computation, and other utility functions.
+## Future Improvements
+- Add real-time simulation with animated movement.
+- Implement a physics-based model for realistic motion.
+- Improve inverse kinematics with numerical solvers.
+
+## License
+This project is licensed under the **MIT License**.
+
+
